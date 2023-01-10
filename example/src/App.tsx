@@ -1,18 +1,20 @@
 import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-default-icon';
+import { StyleSheet, View } from 'react-native';
+import DefaultIcon from 'react-native-default-icon';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <DefaultIcon value={'Hello World'} />
+      <DefaultIcon
+        value={'hello world'}
+        contentContainerStyle={{ width: 80, height: 80, borderRadius: 40 }}
+        textStyle={{ fontSize: 40 }} />
+      <DefaultIcon
+        value={'Hello world'}
+        contentContainerStyle={styles.contentContainerStyle}
+        textStyle={styles.textStyle} />
     </View>
   );
 }
@@ -21,11 +23,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  contentContainerStyle: {
+    width: 100,
+    height: 100,
+    borderRadius: 0,
+  },
+  textStyle: {
+    fontSize: 50,
   },
 });

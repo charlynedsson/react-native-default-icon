@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "react-native-default-icon": ["./src/index"]
-    },
+    },    
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,

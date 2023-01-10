@@ -11,11 +11,11 @@ npm install react-native-default-icon
 ## Usage
 
 ```js
-import { multiply } from 'react-native-default-icon';
+import DefaultIcon from 'react-native-default-icon';
 
 // ...
 
-const result = await multiply(3, 7);
+<DefaultIcon value="Hello World" />
 ```
 
 ## Contributing

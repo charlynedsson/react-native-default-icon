@@ -8,8 +8,8 @@ export default function App() {
       <DefaultIcon value={'Hello World'} />
       <DefaultIcon
         value={'hello world'}
-        contentContainerStyle={{ width: 80, height: 80, borderRadius: 40 }}
-        textStyle={{ fontSize: 40 }}
+        contentContainerStyle={styles.contentContainerStyle}
+        textStyle={styles.textStyle}
       />
 
       <DefaultIcon

@@ -68,11 +68,11 @@ function getBackgroundColor(str: string): ColorHex {
   var colour: ColorHex = '#';
 
   for (var i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    hash = str.charCodeAt(i) + ((hash << 5) - hash); // eslint-disable-line no-bitwise
   }
 
   for (var i = 0; i < 3; i++) {
-    var value = (hash >> (i * 8)) & 0xff;
+    var value = (hash >> (i * 8)) & 0xff; // eslint-disable-line no-bitwise
     colour = `#${('00' + value.toString(16)).substring(-2)}`;
   }
 

@@ -3,18 +3,20 @@ import { StyleSheet, View } from 'react-native';
 import DefaultIcon from 'react-native-default-icon';
 
 export default function App() {
-
   return (
     <View style={styles.container}>
       <DefaultIcon value={'Hello World'} />
       <DefaultIcon
         value={'hello world'}
         contentContainerStyle={{ width: 80, height: 80, borderRadius: 40 }}
-        textStyle={{ fontSize: 40 }} />
+        textStyle={{ fontSize: 40 }}
+      />
+
       <DefaultIcon
         value={'Hello world'}
         contentContainerStyle={styles.contentContainerStyle}
-        textStyle={styles.textStyle} />
+        textStyle={styles.textStyle}
+      />
     </View>
   );
 }

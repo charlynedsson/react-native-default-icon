@@ -1,101 +1,84 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import type { TextStyle, ViewStyle } from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
 
-type ColorHex = `#${string}`;
-
-type ColorRGB = {
-  R: number;
-  G: number;
-  B: number;
-};
+type ColorRGB = `rgb(${number},${number},${number})`;
 
 type DefaultIconProps = {
-  contentContainerStyle?: ViewStyle;
-  textStyle?: TextStyle;
+  borderRadius?: number;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  fontSize?: number;
+  height?: number;
+  textStyle?: StyleProp<TextStyle>;
   value: string;
+  width?: number;
 };
 
 export default function DefaultIcon(props: DefaultIconProps): JSX.Element {
-  const style = React.useMemo(() => {
-    const backgroundColor =
-      (props.contentContainerStyle?.backgroundColor as ColorHex) ??
-      getBackgroundColor(props.value);
-
-    const fontColor = props.textStyle?.color ?? getFontColor(backgroundColor);
-
+  const {
+    backgroundStyle,
+    textStyle,
+  }: {
+    backgroundStyle: ViewStyle;
+    textStyle: TextStyle;
+  } = React.useMemo(() => {
+    const colors = getColors(props.value);
     return {
-      contentContainerStyle: StyleSheet.compose(
+      backgroundStyle: StyleSheet.flatten([
         {
-          ...defaultStyle.contentContainerStyle,
-          backgroundColor: backgroundColor,
+          backgroundColor: colors.background,
+          borderRadius: props.borderRadius ?? 20,
+          height: props.height ?? 40,
+          justifyContent: 'center',
+          width: props.width ?? 40,
         },
-        props.contentContainerStyle
-      ),
-
-      textStyle: StyleSheet.compose(
+        props.contentContainerStyle,
+      ]),
+      textStyle: StyleSheet.flatten([
         {
-          ...defaultStyle.textStyle,
-          color: fontColor,
+          color: colors.font,
+          fontSize: props.fontSize ?? 20,
+          textAlign: 'center',
         },
-        props.textStyle
-      ),
+        props.textStyle,
+      ]),
     };
-  }, [props.value, props.contentContainerStyle, props.textStyle]);
+  }, [props]);
 
   return (
-    <View style={style.contentContainerStyle}>
-      <Text style={style.textStyle}>{props.value[0]}</Text>
+    <View style={backgroundStyle}>
+      <Text style={textStyle}>{props.value[0]}</Text>
     </View>
   );
 }
 
-const defaultStyle: Partial<Omit<DefaultIconProps, 'value'>> = {
-  contentContainerStyle: {
-    borderRadius: 20,
-    height: 40,
-    justifyContent: 'center',
-    width: 40,
-  },
-  textStyle: {
-    fontSize: 20,
-    textAlign: 'center',
-  },
-};
-
-function getBackgroundColor(str: string): ColorHex {
+function getColors(str: string): { background: ColorRGB; font: ColorRGB } {
   var hash = 0;
-  var colour: ColorHex = '#';
-
+  if (str.length === 0)
+    return {
+      background: `rgb(${0},${0},${0})`,
+      font: `rgb(${255},${255},${255})`,
+    };
   for (var i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash); // eslint-disable-line no-bitwise
+    hash = hash & hash; // eslint-disable-line no-bitwise
   }
-
+  var rgb: [number, number, number] = [0, 0, 0];
   for (var i = 0; i < 3; i++) {
-    var value = (hash >> (i * 8)) & 0xff; // eslint-disable-line no-bitwise
-    colour = `#${('00' + value.toString(16)).substring(-2)}`;
+    var value = (hash >> (i * 8)) & 255; // eslint-disable-line no-bitwise
+    rgb[i] = value;
   }
 
-  return colour;
-}
+  var bgDelta = rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114;
 
-function getFontColor(bgColor: ColorHex): ColorHex {
-  var nThreshold = 105;
-  var components = getRGBComponents(bgColor);
-  var bgDelta =
-    components.R * 0.299 + components.G * 0.587 + components.B * 0.114;
+  var ftColor: ColorRGB =
+    255 - bgDelta < 105 ? `rgb(${0},${0},${0})` : `rgb(${255},${255},${255})`;
 
-  return 255 - bgDelta < nThreshold ? '#000000' : '#ffffff';
-}
-
-function getRGBComponents(color: ColorHex): ColorRGB {
-  var r = color.substring(1, 3);
-  var g = color.substring(3, 5);
-  var b = color.substring(5, 7);
-
-  return {
-    R: parseInt(r, 16),
-    G: parseInt(g, 16),
-    B: parseInt(b, 16),
-  };
+  return { background: `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`, font: ftColor };
 }

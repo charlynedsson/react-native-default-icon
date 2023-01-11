@@ -5,17 +5,18 @@ import DefaultIcon from 'react-native-default-icon';
 export default function App() {
   return (
     <View style={styles.container}>
-      <DefaultIcon value={'Hello World'} />
+      <DefaultIcon value={'Icon'} />
       <DefaultIcon
-        value={'hello world'}
+        value={'expo'}
         contentContainerStyle={styles.contentContainerStyle}
         textStyle={styles.textStyle}
       />
-
       <DefaultIcon
-        value={'Hello world'}
-        contentContainerStyle={styles.contentContainerStyle}
-        textStyle={styles.textStyle}
+        value={'React-Native'}
+        borderRadius={50}
+        width={50}
+        height={100}
+        fontSize={25}
       />
     </View>
   );
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
   contentContainerStyle: {
     width: 100,

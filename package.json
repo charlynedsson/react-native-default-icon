@@ -1,6 +1,6 @@
 {
   "name": "react-native-default-icon",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Convenient default icon placeholder component. Automatically generated background color and properly contrasted font. Compatible with react-native and expo.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

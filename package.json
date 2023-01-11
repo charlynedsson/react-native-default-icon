@@ -1,7 +1,7 @@
 {
   "name": "react-native-default-icon",
   "version": "0.1.2",
-  "description": "test",
+  "description": "Convenient default icon placeholder component. Automatically generated background color and properly contrasted font. Compatible with react-native and expo.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -37,8 +37,9 @@
   },
   "keywords": [
     "react-native",
-    "ios",
-    "android"
+    "expo",
+    "icon",
+    "placeholder"
   ],
   "repository": "https://github.com/charlynedsson/react-native-default-icon",
   "author": "charlynedsson <charlynedsson@gmail.com> (https://github.com/charlynedsson)",

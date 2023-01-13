@@ -41,10 +41,10 @@ import DefaultIcon from 'react-native-default-icon';
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 |value | `string` | true | Will generate same background color for same inputted value |
-|fontSize | `ViewStyle` | false | Convenience prop to modify text's fontSize |
-|width | `ViewStyle` | false | Convenience prop to modify contentContainer's width |
-|height | `ViewStyle` | false | Convenience prop to modify contentContainer's height |
-|borderRadius | `ViewStyle` | false | Convenience prop to modify contentContainer's borderRadius |
+|fontSize | `number` | false | Convenience prop to modify text's fontSize |
+|width | `number` | false | Convenience prop to modify contentContainer's width |
+|height | `number` | false | Convenience prop to modify contentContainer's height |
+|borderRadius | `number` | false | Convenience prop to modify contentContainer's borderRadius |
 |contentContainerStyle | `ViewStyle` | false | React-Native View StyleProp |
 |textStyle | `TextStyle` | false | React-Native Text StyleProp |
 
